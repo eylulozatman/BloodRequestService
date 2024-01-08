@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="title">Request Blood</div>
+            <label for="hospitalname">Hospital Name</label>
+            <input type="text" id="hospitalname" name="hospitalname" required>
+
+            <label for="bloodtype">Blood Type:</label>
+            <select id="bloodtype" name="bloodtype">
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+            <label for="city">City:</label>
+            <select id="city" name="city" required onchange="getTowns()">
+                <option value="">Select a city</option>
+            </select>
+        
+            <label for="town">Town:</label>
+            <select id="town" name="town" required>
+                <option value="">Select a town</option>
+            </select>             
+            
+            <label for="email">E-MAIL:</label>
+            <input type="text" id="email" name="email" required>
+            
+    
+            <label for="num_of_units">Number of Units:</label>
+            <select id="num_of_units" name="num_of_units" required>
+                <option value="">Select number of units</option>
+            
+                <option value="1">1 unit</option>
+                <option value="2">2 units</option>
+                <option value="3">3 units</option>
+                <option value="4">4 units</option>
+                <option value="5">5 units</option>
+                <option value="6">6 units</option>
+                <option value="7">7 units</option>
+                <option value="8">8 units</option>
+                <option value="9">9 units</option>
+                <option value="10">10 units</option>
+            </select>
+            
+            <label for="duration_of_search">Duration of Search (days):</label>
+            <select id="duration_of_search" name="duration_of_search" required>
+                <option value="">Select duration of search</option>
+
+                <option value="1">1 day</option>
+                <option value="2">2 days</option>
+                <option value="3">3 days</option>
+                <option value="4">4 days</option>
+                <option value="5">5 days</option>
+                <option value="6">6 days</option>
+                <option value="7">7 days</option>
+                <option value="8">8 days</option>
+                <option value="9">9 days</option>
+                <option value="10">10 days</option>
+            </select>       
+
+            <label for="reason">Reason:</label>
+            <textarea id="reason" name="reason" rows="4" cols="50" required placeholder="Enter your reason here..."></textarea>
+    
+            <input type="submit" value="Create">
+        </form>
+       
+    </div>
+</body>
+</html>
