@@ -37,7 +37,7 @@ def homepage():
         db.session.add(new_request)
         db.session.commit()
 
-        pushRequestToQueue(blood_type,town,city,num_of_units)
+        push_request_to_queue(blood_type,town,city,num_of_units)
         
         return "Request submitted successfully!"
 
