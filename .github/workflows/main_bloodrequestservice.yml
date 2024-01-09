@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'BloodRequestService'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EE47703C039741C2AE6CDF6F806DAD30 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4CAD071DDDA94711A39CDC734EE830E0 }}
