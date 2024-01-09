@@ -41,25 +41,22 @@ def homepage():
 
     return render_template('requestBlood.html')
 
+
 @app.route('/get_queue_data', methods=['GET'])
 def get_queue_data():
-    fillQueue()
-    if not my_queue.empty():
-        data = my_queue.get()
-        return jsonify(data)
-    
-    return "Queue is empty"
-
-
-def fillQueue():
     request_list = Request.query.all()
+    
+    result = []
     for request in request_list:
-        my_queue.put({
+        data = {
             'blood_type': request.blood_type,
             'town': request.town,
             'city': request.city,
             'num_of_units': request.num_of_units
-        })
+        }
+        result.append(data)
+    
+    return jsonify(result)
 
 
 if __name__ == '__main__':
