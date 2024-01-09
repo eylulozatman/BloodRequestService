@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from models import db, Request
+from queue import Queue
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
@@ -9,6 +10,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///requestService.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
+
+
+my_queue = Queue() 
 
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
@@ -33,11 +37,50 @@ def homepage():
 
         db.session.add(new_request)
         db.session.commit()
+
+        pushRequestToQueue(blood_type,town,city,num_of_units)
         
         return "Request submitted successfully!"
 
     return render_template('requestBlood.html')
 
+@app.route('/get_queue_data', methods=['GET'])
+def get_queue_data():
+
+    if not my_queue.empty():
+        data = my_queue.get()
+        return jsonify(data)
+    
+    return "Queue is empty"
+
+def push_request_to_queue(blood_type, town, city, num_of_units):
+  
+    my_queue.put({
+        'blood_type': blood_type,
+        'town': town,
+        'city': city,
+        'num_of_units': num_of_units
+    })
+
+
+
+def add_to_queue(requestId):
+    request_obj = Request.query.filter_by(id=requestId).first()
+    if request_obj:
+        my_queue.put({
+        'blood_type': request_obj.blood_type,
+        'town': request_obj.town,
+        'city': request_obj.city,
+        'num_of_units': request_obj.num_of_units,
+        })
+        return f"Request with ID {requestId} added to the queue."
+
+    return f"No request found with ID {requestId}."
+
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    with app.app_context():
+        add_to_queue(1)
+    app.run(port=8686)
 
