@@ -62,25 +62,20 @@ def push_request_to_queue(blood_type, town, city, num_of_units):
         'num_of_units': num_of_units
     })
 
-
-
-def add_to_queue(requestId):
-    request_obj = Request.query.filter_by(id=requestId).first()
-    if request_obj:
+def fillQueue():
+    request_list = Request.query.all()
+    for request in request_list:
         my_queue.put({
-        'blood_type': request_obj.blood_type,
-        'town': request_obj.town,
-        'city': request_obj.city,
-        'num_of_units': request_obj.num_of_units,
+            'blood_type': request.blood_type,
+            'town': request.town,
+            'city': request.city,
+            'num_of_units': request.num_of_units
         })
-        return f"Request with ID {requestId} added to the queue."
-
-    return f"No request found with ID {requestId}."
 
 
 
 if __name__ == '__main__':
     with app.app_context():
-        add_to_queue(1)
+        fillQueue()
     app.run(port=8686)
 
