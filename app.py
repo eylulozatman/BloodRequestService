@@ -36,10 +36,8 @@ def homepage():
 
         db.session.add(new_request)
         db.session.commit()
-
-        push_request_to_queue(blood_type,town,city,num_of_units)
         
-        return "Request submitted successfully!"
+        return render_template('requestBlood.html', message="Request submitted successfully!")
 
     return render_template('requestBlood.html')
 
@@ -52,14 +50,6 @@ def get_queue_data():
     
     return "Queue is empty"
 
-def push_request_to_queue(blood_type, town, city, num_of_units):
-  
-    my_queue.put({
-        'blood_type': blood_type,
-        'town': town,
-        'city': city,
-        'num_of_units': num_of_units
-    })
 
 def fillQueue():
     request_list = Request.query.all()
