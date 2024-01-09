@@ -45,7 +45,7 @@ def homepage():
 
 @app.route('/get_queue_data', methods=['GET'])
 def get_queue_data():
-
+    fillQueue()
     if not my_queue.empty():
         data = my_queue.get()
         return jsonify(data)
@@ -73,7 +73,5 @@ def fillQueue():
 
 
 if __name__ == '__main__':
-    with app.app_context():
-        fillQueue()
     app.run(port=8686)
 
