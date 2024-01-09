@@ -11,7 +11,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
-
 my_queue = Queue() 
 
 @app.route('/', methods=['GET', 'POST'])
