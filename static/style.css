@@ -1,8 +1,15 @@
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #35495e;
-    color: #fff;
     margin: 0;
+    padding: 0;
+    background: #347474;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 .container {
@@ -52,12 +59,67 @@ form input[type="submit"]:hover {
     background-color: #347474;
 }
 
-.message{
-    background-color: #35495e;
-    margin-left: 25px;
-    color: #fff;
-    border: none;
+
+.msgBoard {
+    width: 50%;
+    height: 40%;
+    border: 1px solid #ccc;
+    overflow-y: auto; /* auto ile içerik fazla olunca scrollbar görünsün, yoksa gözükmesin */
+    border-radius: 5px;
+    background: #35495e;
+}
+
+.messageList {
+    list-style-type: none; /* Madde işaretlerini kaldır */
+    padding: 0;
+    margin: 0;
+}
+
+.messageList li {
+    padding: 10px;
+    border-bottom: 1px solid #aaa; /* Her mesaj arasına ince bir çizgi ekle */
+    color: white;
+}
+
+.messageList li:last-child {
+    border-bottom: none; /* Son mesajın alt çizgisini kaldır */
+}
+
+
+.hpcontainer {
+    width: 40%; /* Sayfanın yarısını kaplayacak */
+    height: 40%;
+    margin: 0 auto; /* Otomatik olarak ortalanacak */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; 
+    padding: 20px; /* Kenar boşlukları */
+    background-color: gray;
+    box-shadow: 1px 7px 6px rgba(198, 163, 163, 0.1); /* Hafif bir gölge efekti */
+}
+
+.c1,
+.c2 {
+    text-align: center;
+    margin: 10px;
+    flex: 1; 
+}
+
+.c1 button,
+.c2 button {
     padding: 10px 20px;
-    border-radius: 3px;
-    transition: background-color 0.3s;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #ff7e67;
+    color:#35495e;
+    border: none;
+    border-radius: 4px;
+    width: 100%; 
+}
+
+@media screen and (max-width: 768px) {
+    .hpcontainer {
+        width: 90%; /* Küçük ekranlarda daha fazla genişlik */
+    }
 }
